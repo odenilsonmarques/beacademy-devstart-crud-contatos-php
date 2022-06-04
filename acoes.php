@@ -11,9 +11,9 @@
     function cadastro(){
         if($_POST){
             //recebendo os dados do formulario
-            $nome = $_POST["nome"];
-            $email = $_POST["email"];
-            $telefone = $_POST["telefone"];
+            $nome = $_POST['nome'];
+            $email = $_POST['email'];
+            $telefone = $_POST['telefone'];
 
             //abrindo e enviando osa dados para o arquivo contatos.csv, caso nao exista é criado um novo
             $arquivo = fopen('dados/contatos.csv', 'a+');
@@ -29,7 +29,7 @@
 
     function listar(){
         $contatos = file('dados/contatos.csv');
-        include 'telas/lista.php';
+        include 'telas/listar.php';
     }
 
     function excluir(){
@@ -46,6 +46,41 @@
         }
         $mensagem = 'Contato Excluído Com Sucesso';
         include 'telas/mensagem.php';
+    }
+
+    function editar(){
+        $id = $_GET['id'];
+
+
+        $contatos = file('dados/contatos.csv');
+
+        if($_POST){
+            $nome = $_POST['nome'];
+            $email = $_POST['email'];
+            $telefone = $_POST['telefone'];
+
+            $contatos[$id] = "{$nome};{$email};{$telefone}.PHP_EOL";
+
+            unlink('dados/contatos.csv');
+
+            $arquivo = fopen('dados/contatos.csv', 'a+');
+
+            foreach($contatos as $cadaContato){
+                fwrite($arquivo, $cadaContato);
+            }
+
+            fclose($arquivo);
+
+            $mensagem = 'Contato Atualizado Com Sucesso';
+            include 'telas/mensagem.php';
+        }
+       
+
+
+        $dados = explode(';', $contatos[$id]);
+
+        include 'telas/editar.php';
+
     }
 
     function erro404(){

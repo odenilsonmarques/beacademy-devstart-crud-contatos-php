@@ -28,10 +28,12 @@ if($url[0] === '/'){
     cadastro();
 }elseif($url[0] === '/login'){//endpoint
     login();
-}elseif($url[0] === '/lista'){//endpoint
+}elseif($url[0] === '/listar'){//endpoint
     listar();
 }elseif($url[0] === '/excluir'){//endpoint
     excluir();
+}elseif($url[0] === '/editar'){//endpoint
+    editar();
 }else{
     erro404();
 }
