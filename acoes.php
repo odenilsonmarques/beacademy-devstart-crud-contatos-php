@@ -59,7 +59,7 @@
             $email = $_POST['email'];
             $telefone = $_POST['telefone'];
 
-            $contatos[$id] = "{$nome};{$email};{$telefone}.PHP_EOL";
+            $contatos[$id] = "{$nome};{$email};{$telefone}".PHP_EOL;
 
             unlink('dados/contatos.csv');
 
